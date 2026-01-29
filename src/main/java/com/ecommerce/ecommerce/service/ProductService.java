@@ -5,7 +5,9 @@ import com.ecommerce.ecommerce.models.CreateProductRequest;
 import com.ecommerce.ecommerce.models.FetchProductResponse;
 import com.ecommerce.ecommerce.models.ProductResponse;
 import com.ecommerce.ecommerce.models.UpdateProductRequest;
+import com.ecommerce.ecommerce.repositories.CategoryRepository;
 import com.ecommerce.ecommerce.repositories.ProductRepository;
+import com.ecommerce.ecommerce.schemas.Category;
 import com.ecommerce.ecommerce.schemas.Products;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
     private final FileStorageService fileStorageService;
 
     public ProductResponse<List<FetchProductResponse>> fetchProducts(int page, int limit, String searchQuery) {
@@ -97,6 +100,7 @@ public class ProductService {
             product.setQuantity(payload.getQuantity());
             product.setPrice(payload.getAmount());
             product.setProductUrl(productUrl != null ? productUrl : "");
+            product.setCategoryId(payload.getCategoryId());
 
             Products savedProduct = productRepository.save(product);
             log.info("Product created successfully with ID: {}", savedProduct.getId());
@@ -148,6 +152,9 @@ public class ProductService {
                 String newProductUrl = fileStorageService.storeImage(payload.getProductImage());
                 existingProduct.setProductUrl(newProductUrl);
             }
+            if (payload.getCategoryId() != null) {
+                existingProduct.setCategoryId(payload.getCategoryId());
+            }
 
             Products updatedProduct = productRepository.save(existingProduct);
             log.info("Product updated successfully with ID: {}", updatedProduct.getId());
@@ -198,6 +205,13 @@ public class ProductService {
     }
 
     private FetchProductResponse mapToFetchProductResponse(Products product) {
+        String categoryName = null;
+        if (product.getCategoryId() != null) {
+            categoryName = categoryRepository.findById(product.getCategoryId())
+                    .map(Category::getName)
+                    .orElse(null);
+        }
+
         return FetchProductResponse.builder()
                 .id(product.getId())
                 .title(product.getTitle())
@@ -206,6 +220,8 @@ public class ProductService {
                 .inStock(product.getQuantity() > 0)
                 .price(product.getPrice())
                 .productUrl(product.getProductUrl())
+                .categoryId(product.getCategoryId())
+                .categoryName(categoryName)
                 .build();
     }
 }

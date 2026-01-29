@@ -19,5 +19,7 @@ public class UpdateProductRequest {
 
     private BigDecimal amount;
 
+    private Long categoryId;
+
     private MultipartFile productImage;
 }

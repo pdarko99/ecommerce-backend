@@ -1,25 +1,24 @@
 package com.ecommerce.ecommerce.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FetchProductResponse {
+public class PurchasedProductResponse {
     private Long id;
-    private String title;
-    private String description;
-    private Boolean inStock;
-    private int quantity;
-    private BigDecimal price;
+    private Long productId;
+    private String productTitle;
+    private String productDescription;
+    private BigDecimal productPrice;
     private String productUrl;
-    private Long categoryId;
-    private String categoryName;
+    private int quantity;
+    private LocalDateTime purchasedAt;
 }

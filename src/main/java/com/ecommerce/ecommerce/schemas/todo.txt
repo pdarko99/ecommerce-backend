@@ -1,3 +1,12 @@
--- help me work on the products section, i want to be able to create, delete, update and fectch products.
--- the products structure is in the models directory named CreateProductRequest and i also have the schema inside the schemas directory named Products you can make some modifications if you think am wrong on not clear
--- inside the create product request the image will be sent to the frontend help me handle that also, i have it stated as productImage you can work on that , for now just give me a placeholder like to store it in a file on the system and help send the url to the frontend in future when we are deploying you can suggest me options
+-- help me work on the purchased product session
+
+-- so the basic concept is when a user adds a product or purchases a product i want to save it in the db
+
+-- in the controllers i have purchasedProductController complete that one for me
+-- same as service
+
+-- you can go through the repository and make modifications as needed
+
+-- same as creating files for response and requests types
+
+-- in some parts i have added comments to help you

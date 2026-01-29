@@ -15,35 +15,25 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Table(name = "products",
-        indexes = {
-                @Index(name = "idx_title", columnList = "title")
-        })
-public class Products {
+@Table(name = "purchased_products")
+public class PurchasedProducts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //this should reference a product
+    private Long productId;
 
-    @Column(nullable = false, length = 120)
-    private String title;
-
-    @Column()
-    private String description;
-
-    private Long categoryId;
-
-    @Column(nullable = false, length = 500)
-    private String productUrl;
-
-    @Column(nullable = false, length = 50)
-    private BigDecimal price;
-
+//    this should reference the user purchasing the item
+    private Long userId;
 
     private int quantity;
 
+    private Long orderId;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal priceAtPurchase;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

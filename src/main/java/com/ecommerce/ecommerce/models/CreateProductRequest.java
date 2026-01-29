@@ -17,5 +17,7 @@ public class CreateProductRequest {
 
     private BigDecimal amount;
 
+    private Long categoryId;
+
     private MultipartFile productImage;
 }

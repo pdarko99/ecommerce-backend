@@ -1,6 +1,5 @@
 package com.ecommerce.ecommerce.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,14 +11,10 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FetchProductResponse {
-    private Long id;
-    private String title;
-    private String description;
-    private Boolean inStock;
-    private int quantity;
-    private BigDecimal price;
-    private String productUrl;
+public class CategoryStatsResponse {
     private Long categoryId;
     private String categoryName;
+    private long productCount;
+    private long totalSold;
+    private BigDecimal totalRevenue;
 }

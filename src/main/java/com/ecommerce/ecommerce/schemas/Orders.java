@@ -1,6 +1,5 @@
 package com.ecommerce.ecommerce.schemas;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,35 +14,20 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Table(name = "products",
-        indexes = {
-                @Index(name = "idx_title", columnList = "title")
-        })
-public class Products {
+@Table(name = "orders")
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long userId;
 
-    @Column(nullable = false, length = 120)
-    private String title;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalAmount;
 
-    @Column()
-    private String description;
-
-    private Long categoryId;
-
-    @Column(nullable = false, length = 500)
-    private String productUrl;
-
-    @Column(nullable = false, length = 50)
-    private BigDecimal price;
-
-
-    private int quantity;
-
+    @Column(length = 20)
+    private String status; // PENDING, COMPLETED, CANCELLED
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
