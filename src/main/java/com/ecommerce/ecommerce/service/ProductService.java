@@ -28,7 +28,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
-    private final FileStorageService fileStorageService;
+    private final ImageStorageService imageStorageService;
 
     public ProductResponse<List<FetchProductResponse>> fetchProducts(int page, int limit, String searchQuery) {
         try {
@@ -89,7 +89,7 @@ public class ProductService {
         try {
             String productUrl = null;
             if (payload.getProductImage() != null && !payload.getProductImage().isEmpty()) {
-                productUrl = fileStorageService.storeImage(payload.getProductImage());
+                productUrl = imageStorageService.storeImage(payload.getProductImage());
             } else {
                 productUrl = "";
             }
@@ -147,9 +147,9 @@ public class ProductService {
             }
             if (payload.getProductImage() != null && !payload.getProductImage().isEmpty()) {
                 if (existingProduct.getProductUrl() != null && !existingProduct.getProductUrl().isEmpty()) {
-                    fileStorageService.deleteImage(existingProduct.getProductUrl());
+                    imageStorageService.deleteImage(existingProduct.getProductUrl());
                 }
-                String newProductUrl = fileStorageService.storeImage(payload.getProductImage());
+                String newProductUrl = imageStorageService.storeImage(payload.getProductImage());
                 existingProduct.setProductUrl(newProductUrl);
             }
             if (payload.getCategoryId() != null) {
@@ -186,7 +186,7 @@ public class ProductService {
             }
 
             Products product = productOpt.get();
-            fileStorageService.deleteImage(product.getProductUrl());
+            imageStorageService.deleteImage(product.getProductUrl());
             productRepository.delete(product);
 
             log.info("Product deleted successfully with ID: {}", productId);
