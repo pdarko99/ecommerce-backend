@@ -34,7 +34,6 @@ build/
 
 ### Local config ###
 src/main/resources/application-dev.properties
-src/main/resources/application-prod.properties
 cloud/docker
 
 ### Environment files ###
