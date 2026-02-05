@@ -1,12 +1,4 @@
--- help me work on the purchased product session
-
--- so the basic concept is when a user adds a product or purchases a product i want to save it in the db
-
--- in the controllers i have purchasedProductController complete that one for me
--- same as service
-
--- you can go through the repository and make modifications as needed
-
--- same as creating files for response and requests types
-
--- in some parts i have added comments to help you
+- this project is actually for my portfolio to show to potential client and mainly recruiters
+- i want to deploy this java backend for free can you suggest me where i can deploy this when i dockerize it
+- and also the db am connecting to
+- lets discuss
